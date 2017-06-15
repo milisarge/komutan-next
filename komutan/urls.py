@@ -23,6 +23,11 @@ urlpatterns = [
 	url(r'^$',menuGoster, name="Menü"),
 	url(r'^giris/$', auth_views.login, {'template_name': 'giris.tpl'}, name='Giriş'),
     url(r'^cikis/$', auth_views.logout, {'template_name': 'cikis.tpl'}, name='Çıkış'),
-	url(r'^admin/', include(admin.site.urls)),
+	url(r'^ayarlar/', include(admin.site.urls)),
     url(r'^komutaModul$',komutaModulGoster, name="Komuta Modülü"),
 ]
+
+# Admin Paneli isimlendirmeleri
+admin.site.site_header = 'Komutan Ayarları'
+admin.site.index_title =  'Ayarlar'
+admin.site.site_title =  'Komutan Ayarları'

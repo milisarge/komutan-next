@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Baglanti
 
-# Register your models here.
+# SSH Bağlantı ayarları arayüz kaydı
+admin.site.register(Baglanti)
