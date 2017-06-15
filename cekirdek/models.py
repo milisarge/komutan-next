@@ -1,7 +1,7 @@
-import os
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
+
 
 # Sadece tek kayıta izin ver
 def tek_kayit(obj):

@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from cekirdek.views import dinamikCSS, menuGoster
 from komutaModul.views import komutaModulGoster
+from komutanGuncelle.views import guncellemeGoster,sistemGuncelle
 
 urlpatterns = [
 	url(r'^$',menuGoster, name="Menü"),
@@ -25,7 +26,9 @@ urlpatterns = [
     url(r'^cikis/$', auth_views.logout, {'template_name': 'cikis.tpl'}, name='Çıkış'),
 	url(r'^ayarlar/', include(admin.site.urls)),
     url(r'^style.css$',dinamikCSS, name="Tema"),
-    url(r'^komutaModul$',komutaModulGoster, name="Komuta Modülü"),
+    url(r'^komutaModul/$',komutaModulGoster, name="Komuta Modülü"),
+    url(r'^komutanGuncelle/$',guncellemeGoster, name="Güncelleme Modülü"),
+    url(r'^guncelle/$',sistemGuncelle, name="Güncelleme Apisi"),
 ]
 
 # Admin Paneli isimlendirmeleri

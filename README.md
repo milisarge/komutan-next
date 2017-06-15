@@ -4,6 +4,7 @@ Komutan Web Yönetim Sistemi Yenileme Çalışması
 ## Bağımlılıklar
 `
 pip3 install django
+pip3 install GitPython
 `
 ## Uygulamayı deploy etme
 ```
@@ -32,7 +33,7 @@ python3 manage.py startapp yeniModul`
 - [ ] surecModul modülünün yazılması
 - [ ] agModul modülünün yazılması
 - [ ] servisModul modülünün yazılması
-- [ ] komutanGuncelleModul modülünün yazılması
+- [X] komutanGuncelleModul modülünün yazılması
 - [ ] ayarModul modülünün yazılması (Sistem Ayarları)
 - [ ] Güvenlik önlemleri
 

@@ -16,7 +16,7 @@ def dinamikCSS(request):
 		'koyuYazi': koyuYazi
 	}
 
-	return HttpResponse(template.render(context, request),content_type="text/css")
+	return HttpResponse(template.render(context, request), content_type="text/css")
 	
 
 
