@@ -3,12 +3,11 @@ Komutan Web Yönetim Sistemi Yenileme Çalışması
 
 ## Bağımlılıklar
 `
-pip install django
+pip3 install django
 `
 ## Uygulamayı deploy etme
 ```
 git clone https://github.com/geekdinazor/komutan-next.git
-cd komutan
 python3 manage.py makemigrations
 python3 manage.py migrate
 python3 manage.py createsuperuser
