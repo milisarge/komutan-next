@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from cekirdek.views import menuGoster
+from cekirdek.views import dinamikCSS, menuGoster
 from komutaModul.views import komutaModulGoster
 
 urlpatterns = [
@@ -24,6 +24,7 @@ urlpatterns = [
 	url(r'^giris/$', auth_views.login, {'template_name': 'giris.tpl'}, name='Giriş'),
     url(r'^cikis/$', auth_views.logout, {'template_name': 'cikis.tpl'}, name='Çıkış'),
 	url(r'^ayarlar/', include(admin.site.urls)),
+    url(r'^style.css$',dinamikCSS, name="Tema"),
     url(r'^komutaModul$',komutaModulGoster, name="Komuta Modülü"),
 ]
 

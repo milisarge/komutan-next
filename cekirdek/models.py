@@ -1,4 +1,6 @@
+import os
 from django.db import models
+from django.conf import settings
 from django.core.exceptions import ValidationError
 
 # Sadece tek kayıta izin ver
@@ -32,4 +34,21 @@ class Baglanti(models.Model):
     def clean(self):
         tek_kayit(self)
 
+
 # Komutan Arayüzü Arkaplan Ayarı
+class Tema(models.Model):
+	arkaplan = models.FilePathField(path=settings.BASE_DIR+'/static/img/artalanlar', match=".*\.png$", recursive=True, default="mavi.png")
+	koyuYazı = models.BooleanField()
+
+    # İsimlendirme Bilgileri
+	class Meta:
+		db_table = "Tema"
+		verbose_name = "Görünüm Ayarı"
+		verbose_name_plural = "Görünüm Ayarları"
+
+	# Kayıtlar listelenirken hangi alan kullanılacak
+	def __str__(self):
+		return "Varsayılan Görünüm"
+
+	def clean(self):
+		tek_kayit(self)

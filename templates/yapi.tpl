@@ -8,6 +8,9 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Dinamik CSS -->
+    <link href="/style.css" rel="stylesheet" type="text/css">
 
     <!-- Custom CSS -->
 
