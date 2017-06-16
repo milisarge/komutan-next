@@ -16,12 +16,12 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from cekirdek.views import dinamikCSS, menuGoster
+from cekirdek.views import dinamikCSS, sistemBilgiGoster
 from komutaModul.views import komutaModulGoster
 from komutanGuncelle.views import guncellemeGoster,sistemGuncelle
 
 urlpatterns = [
-	url(r'^$',menuGoster, name="Menü"),
+	url(r'^$',sistemBilgiGoster, name="Sistem Bilgi Modülü/Anasayfa"),
 	url(r'^giris/$', auth_views.login, {'template_name': 'giris.tpl'}, name='Giriş'),
     url(r'^cikis/$', auth_views.logout, {'template_name': 'cikis.tpl'}, name='Çıkış'),
 	url(r'^ayarlar/', include(admin.site.urls)),

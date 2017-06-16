@@ -1,13 +1,12 @@
-body{
+@media (min-width: 768px) {
+  #page-wrapper {
 	background: url("{{ arkaplan }}")  no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
-	margin:20px 20px 20px 20px;
 {% if not koyuYazi %}
 	color: #ddd;
 {% endif %}
+  }
 }
-
-

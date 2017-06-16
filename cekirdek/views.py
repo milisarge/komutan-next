@@ -22,5 +22,5 @@ def dinamikCSS(request):
 
 # Kullanıcıyı ilk karşılayan ana menüyü göster.
 @login_required()
-def menuGoster(request):
-    return render(request, 'menu.tpl')
+def sistemBilgiGoster(request):
+    return render(request, 'bilgi.tpl')

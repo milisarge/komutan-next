@@ -1,10 +1,25 @@
-{% extends 'yapi.tpl' %}
 <!-- Kullanıcı zaten giriş yapmış ise yönlendir. -->
 {% if user.is_authenticated %}
     <meta http-equiv="refresh" content="0; url=/AnaSayfa"/>
 {% endif %}
-{% block content %}
-<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Komutan Giriş</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Dinamik CSS -->
+    <link href="/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<div id="page-wrapper" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
   <div class="modal-content">
       <div class="modal-header">
@@ -45,4 +60,16 @@
   </div>
   </div>
 </div>
-{% endblock content %}
+</body>
+
+   <!-- jQuery Version 1.11.1 -->
+    <script src="/static/js/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+
+    {% block customjs %}{% endblock %}
+
+</html>
