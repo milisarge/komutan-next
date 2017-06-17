@@ -4,7 +4,7 @@
 <script>
 	$(document).ready(function(){
 	    $("#guncelleButon").click(function(){
-	        $.get("/guncelle", function(data, status){
+	        $.get("/komutanGuncelle/guncelle", function(data, status){
 	            $('#guncellemeDurum').html(data);
 	        });
 	    });

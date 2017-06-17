@@ -1,37 +1,51 @@
-"""komutan URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.8/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Add an import:  from blog import urls as blog_urls
-    2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+Komutan URL Yapılandırması
+
+Burası modüllere ait URL yapılandırmalarının 
+eklendiği yerdir. Her modülün kendine ait 
+bir ana URLsi vardır ve modüllere ait diğer
+URL'ler bu URL adresine eklenir. Modül adları ve
+URL adresleri camelCase yapısına uygun isimlendirilmeli
+ve Türkçe karakter içermemelidir. 
+
+Örneğin Benim Modülüm adlı bir modül için modül adı 
+benimModulum ve ana URL yapısı r'^benimModulum/' 
+şeklinde olmalıdır. Benim Modülüm modülünün 
+alt sayfası olan Merhaba Dünya sayfasının URL 
+adresi  /benimModulum/merhabaDunya şeklinde olacaktır.
+
+Yeni modül yaratılmaya gerek olmayan çekirdek fonksiyonlar 
+cekirdek adlı modüle eklenmelidir. Bu modülün URL yapılandırma
+dosyasına eklenen yapılandırmalar kök URL ye eklenir. 
+Örneğin; /giris, /cikis, /ayarlar, /style.css
+"""
+
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.contrib.auth import views as auth_views
-from cekirdek.views import dinamikCSS, sistemBilgiGoster
-from komutaModul.views import komutaModulGoster
-from komutanGuncelle.views import guncellemeGoster,sistemGuncelle
-
-urlpatterns = [
-	url(r'^$',sistemBilgiGoster, name="Sistem Bilgi Modülü/Anasayfa"),
-	url(r'^giris/$', auth_views.login, {'template_name': 'giris.tpl'}, name='Giriş'),
-    url(r'^cikis/$', auth_views.logout, {'template_name': 'cikis.tpl'}, name='Çıkış'),
-	url(r'^ayarlar/', include(admin.site.urls)),
-    url(r'^style.css$',dinamikCSS, name="Tema"),
-    url(r'^komutaModul/$',komutaModulGoster, name="Komuta Modülü"),
-    url(r'^komutanGuncelle/$',guncellemeGoster, name="Güncelleme Modülü"),
-    url(r'^guncelle/$',sistemGuncelle, name="Güncelleme Apisi"),
-]
+from cekirdek import urls as komutanCekirdek
+from komutanGuncelle import urls as komutanGuncelle
+# from komutaModul import urls as komutaModul
+# from rehberModul import urls as rehberModul
+# from mpsModul import urls as mpsModul
+# from surecModul import urls as surecModul
+# from servisModul import urls as servisModul
+# from agModul import urls as agModul
 
 # Admin Paneli isimlendirmeleri
 admin.site.site_header = 'Komutan Ayarları'
 admin.site.index_title =  'Ayarlar'
 admin.site.site_title =  'Komutan Ayarları'
+
+# URL Yapılandırması
+urlpatterns = [
+    url(r'^', include(komutanCekirdek)),
+    url(r'^ayarlar/', include(admin.site.urls)),
+    url(r'^komutanGuncelle/', include(komutanGuncelle)),
+#     url(r'^komutaModul/', include(komutaModul)),
+#     url(r'^rehberModul/', include(komutaModul)),
+#     url(r'^rehberModul/', include(komutaModul)),
+#     url(r'^mpsModul/', include(mpsModul)),
+#     url(r'^surecModul/', include(surecModul)),
+#     url(r'^servisModul/', include(servisModul)),
+#     url(r'^agModul/', include(agModul)),
+]
