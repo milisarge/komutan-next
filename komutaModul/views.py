@@ -25,12 +25,13 @@ def betikCalistir(request):
 				betikYol = os.getcwd() + '/komutaModul/betikler/' + betik
 				put(betikYol,'/tmp')
 				if sudo == "0":
-					cikti = run("sh " + betik)
+					cikti = run("bash " + betik)
+					#cikti = "sh " + betik
 					run("rm " + betik)
 				else:
 					# 'str' object is not callable hatası veriyor. Çözülmesi gerek.
-					#sudo('sh ' + betik, user="root")
-					cikti = "sudo sh" + betik
+					#sudo('bash ' + betik, user="root")
+					cikti = "sudo bash" + betik
 					run("rm " + betik)
 
 

@@ -4,7 +4,7 @@
 <h2>Komuta Merkezi</h2>
 <br>
 <br>
-<div class="col-xs-6">
+<div class="row">
 <form id="betikForm" class="form-inline" role="form">
 	{% csrf_token %}
 	<div class="form-group">
@@ -13,13 +13,24 @@
 			<option>{{betik}}</option>
 		{% endfor %}
 		</select>
-		 <input type="checkbox" class="form-control" name="sudo"> 
-		 	Root yetkisiyle çalıştır
 	</div>
-</form>
-<button type="button" class="btn btn-success calistir">Çalıştır</button>
+	<div class="form-group">	 
+        <li class="list-group-item">
+        <span> Root Yetkisiyle Çalıştır&nbsp;&nbsp;</span>
+        <div class="material-switch pull-right">
+            <input id="rootCheckbox" name="sudo" type="checkbox"/> 
+            <label for="rootCheckbox" class="label-success"></label>
+        </div>
+</li>
+	</div>
+
+<div class="form-group">
+	<button type="button" class="btn btn-success calistir">Çalıştır</button>
 </div>
-<div class="col-xs-12">
+</form>
+
+</div>
+<div class="row">
 	<br>
 	<br>
 	<pre class="well cikti"></pre>
@@ -31,11 +42,11 @@
 <script>
 	$(".calistir").click(function () {
 
-		var sudo = "&sudo=0"
+		var rootYetkisi = "&sudo=0"
 
 		if ($(':input[name="sudo"]:checked').length) {
 
-			sudo = "&sudo=1"
+			rootYetkisi = "&sudo=1"
 
 		}
 		
@@ -44,11 +55,20 @@
 	    $.ajax({
 	            url: '/komutaModul/betikCalistir/',
 	            type: 'POST',
-	            data: formVerisi + sudo,
+	            data: formVerisi + rootYetkisi,
 	            success: function (data) {
-	                $('.cikti').html(data)
+	            	$('.cikti').show();
+	                $('.cikti').html(data);
 	            }
 	        });
 	});
 </script>
 {% endblock customjs %}
+{% block customcss %}
+<style>
+	.cikti{
+		height: 60vh;
+		display: none;
+	}
+</style>
+{% endblock customcss %}
