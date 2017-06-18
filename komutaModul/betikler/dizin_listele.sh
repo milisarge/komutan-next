@@ -1,0 +1,2 @@
+DIR=~
+ls -l $DIR

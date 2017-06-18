@@ -2,6 +2,7 @@ import git
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.management import call_command
+from django.contrib.auth.decorators import login_required
 
 def guncellemeGoster(request):
 	repo = git.Repo('.')
