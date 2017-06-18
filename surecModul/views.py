@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def surecModulGoster(request):
+	return render(request, 'surecModul/index.tpl')

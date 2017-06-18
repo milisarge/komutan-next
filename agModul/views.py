@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def agModulGoster(request):
+	return render(request, 'agModul/index.tpl')

@@ -1,5 +1,6 @@
 {% extends 'yapi.tpl' %}
 <!-- Kullanıcı  giriş yapmamış ise yönlendir. -->
+{% block title %}Komutan - Sistem Bilgisi{% endblock %}
 {% if user.is_anonymous %}
 <meta http-equiv="refresh" content="0; url=/giris"/>
 {% else %}

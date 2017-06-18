@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def mpsModulGoster(request):
+	return render(request, 'mpsModul/index.tpl')

@@ -24,12 +24,12 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from cekirdek import urls as komutanCekirdek
 from komutanGuncelle import urls as komutanGuncelle
-# from komutaModul import urls as komutaModul
-# from rehberModul import urls as rehberModul
-# from mpsModul import urls as mpsModul
-# from surecModul import urls as surecModul
-# from servisModul import urls as servisModul
-# from agModul import urls as agModul
+from komutaModul import urls as komutaModul
+from rehberModul import urls as rehberModul
+from mpsModul import urls as mpsModul
+from surecModul import urls as surecModul
+from servisModul import urls as servisModul
+from agModul import urls as agModul
 
 # Admin Paneli isimlendirmeleri
 admin.site.site_header = 'Komutan Ayarları'
@@ -41,11 +41,10 @@ urlpatterns = [
     url(r'^', include(komutanCekirdek)),
     url(r'^ayarlar/', include(admin.site.urls)),
     url(r'^komutanGuncelle/', include(komutanGuncelle)),
-#     url(r'^komutaModul/', include(komutaModul)),
-#     url(r'^rehberModul/', include(komutaModul)),
-#     url(r'^rehberModul/', include(komutaModul)),
-#     url(r'^mpsModul/', include(mpsModul)),
-#     url(r'^surecModul/', include(surecModul)),
-#     url(r'^servisModul/', include(servisModul)),
-#     url(r'^agModul/', include(agModul)),
+    url(r'^komutaModul/', include(komutaModul)),
+    url(r'^rehberModul/', include(rehberModul)),
+    url(r'^mpsModul/', include(mpsModul)),
+    url(r'^surecModul/', include(surecModul)),
+    url(r'^servisModul/', include(servisModul)),
+    url(r'^agModul/', include(agModul)),
 ]
