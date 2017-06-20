@@ -10,7 +10,24 @@ from fabric.api import *
 @login_required()
 def komutaModulGoster(request):
 	betikler = os.listdir(os.curdir + '/komutaModul/betikler/')
-	return render(request, 'komutaModul/index.tpl', {"betikler":betikler})
+	if 'betik' in request.GET.keys():
+		f = open(os.curdir + '/komutaModul/betikler/' + request.GET['betik'], 'r')
+		parametreler = f.readline()
+		betik = request.GET['betik']
+		if parametreler[0] == "#":
+			parametreler = parametreler.replace('#','').replace('\n','').split('|')
+			d = dict()
+			for parametre in parametreler:
+				parametre = parametre.split(':')
+				d.update({parametre[0]:[parametre[1],parametre[2]]})
+			parametreler = d
+			print(parametreler)
+			return render(request, 'komutaModul/index.tpl', {"betikler":betikler,"betik":betik,"parametreler":parametreler})
+
+		else:
+			return render(request, 'komutaModul/index.tpl', {"betikler":betikler,"betik":betik})
+	else:
+		return render(request, 'komutaModul/index.tpl', {"betikler":betikler})
 
 @login_required()
 def betikCalistir(request):

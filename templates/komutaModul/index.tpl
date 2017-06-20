@@ -8,12 +8,21 @@
 <form id="betikForm" class="form-inline" role="form">
 	{% csrf_token %}
 	<div class="form-group">
-		<select class="form-control" name="betik" id="betik" > 
+		<select class="form-control" name="betik" id="betik" >
+		<option value="">---</option>
 		{% for betik in betikler %}
 			<option>{{betik}}</option>
 		{% endfor %}
 		</select>
 	</div>
+{% if parametreler %}
+{% for parametre, degerler in parametreler.items %} 
+<div class="form-group kutu">
+<span>{{ degerler.0 }}: </span>
+<input type="text" class="" name="{{ parametre }}" value="{{ degerler.1 }}">  
+</div>
+{% endfor %}
+{% endif %}
 	<div class="form-group kutu">	 
         <span> Root Yetkisiyle Çalıştır&nbsp;&nbsp;</span>
         <div class="material-switch pull-right">
@@ -21,10 +30,10 @@
             <label for="rootCheckbox" class="label-success"></label>
         </div>
 	</div>
-
 <div class="form-group">
 	<button type="button" class="btn btn-success calistir">Çalıştır</button>
 </div>
+
 </form>
 
 </div>
@@ -38,6 +47,16 @@
 
 {% block customjs %}
 <script>
+	{% if betik %}
+		$('#betik').val("{{ betik }}")
+	{% endif %}
+	
+	$('#betik').change(function(event) {
+		if (this.value) {
+			window.location.replace("?betik="+this.value);
+		}
+	});
+
 	$(".calistir").click(function () {
 		
 		formVerisi = $('#betikForm').serialize();		

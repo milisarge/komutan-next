@@ -1,5 +1,3 @@
-#!/bin/bash
-
 SYSINFO=`head -n 1 /etc/issue`
 IFS=$'\n'
 UPTIME=`uptime`
