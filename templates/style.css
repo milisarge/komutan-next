@@ -11,6 +11,8 @@
   }
 }
 
+/* Material Switch */ 
+
 .material-switch > input[type="checkbox"] {
     display: none;   
 }
@@ -54,4 +56,17 @@
 .material-switch > input[type="checkbox"]:checked + label::after {
     background: inherit;
     left: 20px;
+}
+
+/* Kutu */
+
+.kutu {
+
+	position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+
 }

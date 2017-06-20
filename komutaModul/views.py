@@ -16,7 +16,6 @@ def komutaModulGoster(request):
 def betikCalistir(request):
 	if(request.method=='POST'):
 		betik = request.POST['betik']
-		sudo = request.POST['sudo']
 		if betik:
 			env.host_string = Baglanti.objects.all()[0].sunucu
 			env.user = Baglanti.objects.all()[0].kullanici
@@ -24,14 +23,11 @@ def betikCalistir(request):
 			with hide('output','running'), cd('/tmp'):
 				betikYol = os.getcwd() + '/komutaModul/betikler/' + betik
 				put(betikYol,'/tmp')
-				if sudo == "0":
-					cikti = run("bash " + betik)
-					#cikti = "sh " + betik
+				if 'sudo' in request.POST.keys():
+					cikti = sudo("bash " + betik)
 					run("rm " + betik)
 				else:
-					# 'str' object is not callable hatası veriyor. Çözülmesi gerek.
-					#sudo('bash ' + betik, user="root")
-					cikti = "sudo bash" + betik
+					cikti = run('bash ' + betik)
 					run("rm " + betik)
 
 

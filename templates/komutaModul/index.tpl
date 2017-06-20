@@ -14,14 +14,12 @@
 		{% endfor %}
 		</select>
 	</div>
-	<div class="form-group">	 
-        <li class="list-group-item">
+	<div class="form-group kutu">	 
         <span> Root Yetkisiyle Çalıştır&nbsp;&nbsp;</span>
         <div class="material-switch pull-right">
             <input id="rootCheckbox" name="sudo" type="checkbox"/> 
             <label for="rootCheckbox" class="label-success"></label>
         </div>
-</li>
 	</div>
 
 <div class="form-group">
@@ -41,21 +39,13 @@
 {% block customjs %}
 <script>
 	$(".calistir").click(function () {
-
-		var rootYetkisi = "&sudo=0"
-
-		if ($(':input[name="sudo"]:checked').length) {
-
-			rootYetkisi = "&sudo=1"
-
-		}
 		
 		formVerisi = $('#betikForm').serialize();		
 
 	    $.ajax({
 	            url: '/komutaModul/betikCalistir/',
 	            type: 'POST',
-	            data: formVerisi + rootYetkisi,
+	            data: formVerisi,
 	            success: function (data) {
 	            	$('.cikti').show();
 	                $('.cikti').html(data);
