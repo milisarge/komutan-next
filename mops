@@ -1,0 +1,104 @@
+#!/bin/bash
+
+#### proje bazlı değişkenler
+tip="git"
+hesap="milisarge"
+proje="komutan2"
+####
+
+klon=""
+gunle=""
+link=""
+
+
+if [ $tip == "git" ];then
+	klon="git clone"
+	gunle="git pull"
+	link="https://github.com"
+fi
+
+# sabit yordamlar
+kontrol(){
+	mkdir -p /opt/mops
+	if [ -d /opt/mops/$hesap-$proje ]; then
+		guncelle
+	else
+		indir
+	fi
+}
+
+indir(){
+	echo "proje indiriliyor"
+	`$klon $link/$hesap/$proje /opt/mops/$hesap-$proje`
+	echo "proje indirildi."
+	kur
+}
+
+derle(){
+	echo "proje derleniyor"
+	
+	#### proje bazlı işlemler
+	#./configure
+	# make
+	####
+	
+	echo "proje derlendi."
+	kur
+}
+
+kur(){
+	# derleme varsa alt yordamı aç
+	# derle
+	echo "proje kuruluyor"
+	# make DESTDIR=/opt/mops/$hesap-$proje install
+	cd /opt/mops/$hesap-$proje
+	
+	#### proje bazlı işlemler
+	pip3 install -r gerekler
+	####
+	
+	echo "proje kuruldu."
+	yapilandir
+}
+
+guncelle(){
+	echo "proje güncelleniyor"
+	cd /opt/mops/$hesap-$proje
+	$gunle
+	
+	
+	#### proje bazlı işlemler
+	pip3 install -r gerekler
+	####
+	
+	
+	echo "proje güncellendi."
+}
+
+yapilandir(){
+	echo "proje yapılandırılıyor"
+	echo "proje yapılandırıldı."
+}
+
+sil(){
+	echo "proje siliniyor"
+	# silinme esnasında yapılacaklar
+	# make uninstall
+
+
+	#### proje bazlı işlemler
+	# pip3 uninstall -r gerekler
+	rm -r /opt/mops/$hesap-$proje
+	####
+	
+	
+	echo "proje silindi."
+}
+
+if [ "$1" == kur ]; then
+	kontrol
+fi
+
+if [ "$1" == sil ]; then
+	sil
+fi
