@@ -1,3 +1,4 @@
 django
 GitPython
-fabric
+fabric3
+django-wpadmin

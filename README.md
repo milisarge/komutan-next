@@ -28,7 +28,7 @@ python3 manage.py startapp yeniModul`
 - [X] Genel tasarımın oluşturulması
 - [ ] Varolan Modüllerin önyüzlerinin (frontend) oluşturulması
 - [X] admin panelinde gözükecek komutan tercihleri modülünün yazılması
-- [ ] [Fabric](http://docs.fabfile.org/en/1.13/) modülü kullanılarak komut çatısının oluşturulması
+- [X] [Fabric](http://docs.fabfile.org/en/1.13/) modülü kullanılarak komut çatısının oluşturulması
 - [X] komutaModul modülünün yazılması
 - [ ] mpsModul modülünün yazılması
 - [ ] surecModul modülünün yazılması

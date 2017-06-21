@@ -1,7 +1,11 @@
 {% extends 'yapi.tpl' %}
 {% block title %}Komutan - Komuta Merkezi{% endblock %}
 {% block content %}
-<h2>Komuta Merkezi</h2>
+<h2>Komuta Merkezi</h2> 
+<a href="betikEkle/"  class="label label-success">Yeni Betik Ekle</a>
+<a href="betikDuzenle/"  class="label label-primary">Betik Düzenle</a>
+<a href="betikSil/"  class="label label-danger">Betik Sil</a>
+<a href="gitGuncelle/"  class="label label-warning">Git Deposundan Betikleri Güncelle</a>
 <br>
 <br>
 <div class="row">
@@ -19,7 +23,7 @@
 {% for parametre, degerler in parametreler.items %} 
 <div class="form-group kutu">
 <span>{{ degerler.0 }}: </span>
-<input type="text" class="" name="{{ parametre }}" value="{{ degerler.1 }}">  
+<input type="text" class="parametre" name="{{ parametre }}" value="{{ degerler.1 }}">  
 </div>
 {% endfor %}
 {% endif %}
@@ -55,6 +59,24 @@
 		if (this.value) {
 			window.location.replace("?betik="+this.value);
 		}
+	});
+
+	$('.parametre').focusout(function(event) {
+		betik = "{{ betik }}"
+		parametre = $( this )[0].name
+		parametreBaslik = $( this ).siblings()[0].outerText.replace(':','')
+		deger = $( this ).val()
+        $.post("parametreKaydet/",
+        {
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          betik: betik,
+          parametre: parametre,
+          parametreBaslik : parametreBaslik,
+          deger : deger
+        },
+        function(data,status){
+            console.log(data)
+        });		
 	});
 
 	$(".calistir").click(function () {
