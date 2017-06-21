@@ -12,7 +12,7 @@ def tek_kayit(obj):
 
 # SSH Bağlantı ayarları
 class Baglanti(models.Model):
-    sunucu = models.CharField(max_length=50)
+    sunucu = models.CharField(max_length=50, default="localhost")
     kullanici = models.CharField(max_length=32)
     
     # Yapılacaklar:

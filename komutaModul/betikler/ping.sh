@@ -1,4 +1,5 @@
-#-h:Host:google.com|-s:Ping Sayısı:5
+#-h:Host:google.com
+
 sayac=5
 
 function kullanim
@@ -10,7 +11,6 @@ function kullanim
 
 function pingAt
 {
-    echo $sayac
     ping $1 -c $sayac
 }
 

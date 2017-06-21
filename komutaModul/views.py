@@ -21,7 +21,6 @@ def komutaModulGoster(request):
 				parametre = parametre.split(':')
 				d.update({parametre[0]:[parametre[1],parametre[2]]})
 			parametreler = d
-			print(parametreler)
 			return render(request, 'komutaModul/index.tpl', {"betikler":betikler,"betik":betik,"parametreler":parametreler})
 
 		else:
@@ -33,6 +32,10 @@ def komutaModulGoster(request):
 def betikCalistir(request):
 	if(request.method=='POST'):
 		betik = request.POST['betik']
+		parametreler = ""
+		for key in request.POST.keys():
+			if  "-" in key :
+				parametreler += " " + key + " " + request.POST[key]
 		if betik:
 			env.host_string = Baglanti.objects.all()[0].sunucu
 			env.user = Baglanti.objects.all()[0].kullanici
@@ -42,9 +45,9 @@ def betikCalistir(request):
 				put(betikYol,'/tmp')
 				if 'sudo' in request.POST.keys():
 					cikti = sudo("bash " + betik)
-					run("rm " + betik)
+					run("rm " + betik + parametreler)
 				else:
-					cikti = run('bash ' + betik)
+					cikti = run('bash ' + betik + parametreler)
 					run("rm " + betik)
 
 
