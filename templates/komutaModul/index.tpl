@@ -19,7 +19,7 @@
 {% for parametre, degerler in parametreler.items %} 
 <div class="form-group kutu">
 <span>{{ degerler.0 }}: </span>
-<input type="text" class="" name="{{ parametre }}" value="{{ degerler.1 }}">  
+<input type="text" class="parametre" name="{{ parametre }}" value="{{ degerler.1 }}">  
 </div>
 {% endfor %}
 {% endif %}
@@ -55,6 +55,24 @@
 		if (this.value) {
 			window.location.replace("?betik="+this.value);
 		}
+	});
+
+	$('.parametre').focusout(function(event) {
+		betik = "{{ betik }}"
+		parametre = $( this )[0].name
+		parametreBaslik = $( this ).siblings()[0].outerText.replace(':','')
+		deger = $( this ).val()
+        $.post("parametreKaydet/",
+        {
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          betik: betik,
+          parametre: parametre,
+          parametreBaslik : parametreBaslik,
+          deger : deger
+        },
+        function(data,status){
+            console.log(data)
+        });		
 	});
 
 	$(".calistir").click(function () {
