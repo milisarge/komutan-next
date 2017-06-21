@@ -10,13 +10,29 @@ from fabric.api import *
 @login_required()
 def komutaModulGoster(request):
 	betikler = os.listdir(os.curdir + '/komutaModul/betikler/')
-	return render(request, 'komutaModul/index.tpl', {"betikler":betikler})
+	if 'betik' in request.GET.keys():
+		f = open(os.curdir + '/komutaModul/betikler/' + request.GET['betik'], 'r')
+		parametreler = f.readline()
+		betik = request.GET['betik']
+		if parametreler[0] == "#":
+			parametreler = parametreler.replace('#','').replace('\n','').split('|')
+			d = dict()
+			for parametre in parametreler:
+				parametre = parametre.split(':')
+				d.update({parametre[0]:[parametre[1],parametre[2]]})
+			parametreler = d
+			print(parametreler)
+			return render(request, 'komutaModul/index.tpl', {"betikler":betikler,"betik":betik,"parametreler":parametreler})
+
+		else:
+			return render(request, 'komutaModul/index.tpl', {"betikler":betikler,"betik":betik})
+	else:
+		return render(request, 'komutaModul/index.tpl', {"betikler":betikler})
 
 @login_required()
 def betikCalistir(request):
 	if(request.method=='POST'):
 		betik = request.POST['betik']
-		sudo = request.POST['sudo']
 		if betik:
 			env.host_string = Baglanti.objects.all()[0].sunucu
 			env.user = Baglanti.objects.all()[0].kullanici
@@ -24,14 +40,11 @@ def betikCalistir(request):
 			with hide('output','running'), cd('/tmp'):
 				betikYol = os.getcwd() + '/komutaModul/betikler/' + betik
 				put(betikYol,'/tmp')
-				if sudo == "0":
-					cikti = run("bash " + betik)
-					#cikti = "sh " + betik
+				if 'sudo' in request.POST.keys():
+					cikti = sudo("bash " + betik)
 					run("rm " + betik)
 				else:
-					# 'str' object is not callable hatası veriyor. Çözülmesi gerek.
-					#sudo('bash ' + betik, user="root")
-					cikti = "sudo bash" + betik
+					cikti = run('bash ' + betik)
 					run("rm " + betik)
 
 

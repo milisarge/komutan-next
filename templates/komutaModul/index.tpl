@@ -8,25 +8,32 @@
 <form id="betikForm" class="form-inline" role="form">
 	{% csrf_token %}
 	<div class="form-group">
-		<select class="form-control" name="betik" id="betik" > 
+		<select class="form-control" name="betik" id="betik" >
+		<option value="">---</option>
 		{% for betik in betikler %}
 			<option>{{betik}}</option>
 		{% endfor %}
 		</select>
 	</div>
-	<div class="form-group">	 
-        <li class="list-group-item">
+{% if parametreler %}
+{% for parametre, degerler in parametreler.items %} 
+<div class="form-group kutu">
+<span>{{ degerler.0 }}: </span>
+<input type="text" class="" name="{{ parametre }}" value="{{ degerler.1 }}">  
+</div>
+{% endfor %}
+{% endif %}
+	<div class="form-group kutu">	 
         <span> Root Yetkisiyle Çalıştır&nbsp;&nbsp;</span>
         <div class="material-switch pull-right">
             <input id="rootCheckbox" name="sudo" type="checkbox"/> 
             <label for="rootCheckbox" class="label-success"></label>
         </div>
-</li>
 	</div>
-
 <div class="form-group">
 	<button type="button" class="btn btn-success calistir">Çalıştır</button>
 </div>
+
 </form>
 
 </div>
@@ -40,22 +47,24 @@
 
 {% block customjs %}
 <script>
-	$(".calistir").click(function () {
-
-		var rootYetkisi = "&sudo=0"
-
-		if ($(':input[name="sudo"]:checked').length) {
-
-			rootYetkisi = "&sudo=1"
-
+	{% if betik %}
+		$('#betik').val("{{ betik }}")
+	{% endif %}
+	
+	$('#betik').change(function(event) {
+		if (this.value) {
+			window.location.replace("?betik="+this.value);
 		}
+	});
+
+	$(".calistir").click(function () {
 		
 		formVerisi = $('#betikForm').serialize();		
 
 	    $.ajax({
 	            url: '/komutaModul/betikCalistir/',
 	            type: 'POST',
-	            data: formVerisi + rootYetkisi,
+	            data: formVerisi,
 	            success: function (data) {
 	            	$('.cikti').show();
 	                $('.cikti').html(data);
