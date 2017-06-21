@@ -12,14 +12,14 @@ def tek_kayit(obj):
 
 # SSH Bağlantı ayarları
 class Baglanti(models.Model):
-    sunucu = models.CharField(max_length=50, default="localhost")
-    kullanici = models.CharField(max_length=32)
+    sunucu = models.CharField(max_length=50, default="localhost", verbose_name='SSH Sunucu Adresi')
+    kullanici = models.CharField(max_length=32, verbose_name='Kullanıcı', help_text="Buraya Komutan kullanıcı adınızı değil sistem kullanıcı adınızı giriniz. ")
     
     # Yapılacaklar:
     # 1.Bu kısma yıldızlı şifre şeysi koyulacak.
     # 2.SSH Key desteği eklenecek.
 
-    sifre = models.CharField(max_length=40)
+    sifre = models.CharField(max_length=40, verbose_name='Şifre')
     
     # İsimlendirme Bilgileri
     class Meta:
@@ -37,8 +37,8 @@ class Baglanti(models.Model):
 
 # Komutan Arayüzü Arkaplan Ayarı
 class Tema(models.Model):
-	arkaplan = models.FilePathField(path=settings.BASE_DIR+'/static/img/artalanlar', match=".*\.png$", recursive=True, default="mavi.png")
-	koyuYazı = models.BooleanField()
+	arkaplan = models.FilePathField(path=settings.BASE_DIR+'/static/img/artalanlar', match=".*\.png$", recursive=True, default="mavi.png", verbose_name='Arayüz arkaplan resmi')
+	koyuYazı = models.BooleanField(verbose_name='Koyu renk yazı kullanılsın')
 
     # İsimlendirme Bilgileri
 	class Meta:

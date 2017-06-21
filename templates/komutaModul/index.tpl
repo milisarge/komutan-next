@@ -1,7 +1,11 @@
 {% extends 'yapi.tpl' %}
 {% block title %}Komutan - Komuta Merkezi{% endblock %}
 {% block content %}
-<h2>Komuta Merkezi</h2>
+<h2>Komuta Merkezi</h2> 
+<a href="betikEkle/"  class="label label-success">Yeni Betik Ekle</a>
+<a href="betikDuzenle/"  class="label label-primary">Betik Düzenle</a>
+<a href="betikSil/"  class="label label-danger">Betik Sil</a>
+<a href="gitGuncelle/"  class="label label-warning">Git Deposundan Betikleri Güncelle</a>
 <br>
 <br>
 <div class="row">

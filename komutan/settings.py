@@ -25,7 +25,7 @@ SECRET_KEY = 're$&ietdro@q9knt^nyon%8klrr(nm5e#jp8o5s(6j4i-9lun%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/giris'
@@ -33,6 +33,7 @@ LOGIN_URL = '/giris'
 # Application definition
 
 INSTALLED_APPS = (
+    'wpadmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
